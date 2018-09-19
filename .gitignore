@@ -17,7 +17,8 @@ Download/
 .LSOverride
 
 # Icon must end with two \r
-Icon
+Icon
+
 
 # Thumbnails
 ._*
@@ -74,3 +75,6 @@ build/
 geckodriver.log
 DATA_COURSE_DETAILED_LIST_CDN.json
 .vscode
+
+# environment variables
+.env

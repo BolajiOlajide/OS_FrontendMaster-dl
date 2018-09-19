@@ -1,8 +1,9 @@
-from bs4                             import BeautifulSoup
-from selenium                        import webdriver
-from selenium.webdriver.common.keys  import Keys
-from urllib2                         import urlopen, URLError, HTTPError
-from helper                          import *
+import os
+
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from helper import *
 
 import httplib
 import cookielib
@@ -12,13 +13,16 @@ import os
 import time
 
 # Constants
-DATA_COURSE_LIST              = './DATA_COURSE_LIST.json'
+DATA_COURSE_LIST = './DATA_COURSE_LIST.json'
 DATA_COURSE_DETAILED_LIST_CDN = './DATA_COURSE_DETAILED_LIST_CDN.json'
-URL_LOG_IN                    = 'https://frontendmasters.com/login/'
-URL_COURSE_LIST               = 'https://frontendmasters.com/courses/'
+URL_LOG_IN = 'https://frontendmasters.com/login/'
+URL_COURSE_LIST = 'https://frontendmasters.com/courses/'
+
 
 class Spider(object):
-    def __init__(self, mute_audio):
+    def __init__(self, mute_audio=True):
+        BASE_DIR = os.getcwd()
+        chrome_path = BASE_DIR + '/chromedriver'
         options = webdriver.ChromeOptions()
 
         # FM detects useragent and says 403 as return
@@ -31,7 +35,7 @@ class Spider(object):
         if mute_audio:
             options.add_argument("--mute-audio")
 
-        self.browser = webdriver.Chrome(chrome_options=options)
+        self.browser = webdriver.Chrome(chrome_path, chrome_options=options)
 
     def login(self, id, password):
         self.browser.get(URL_LOG_IN)

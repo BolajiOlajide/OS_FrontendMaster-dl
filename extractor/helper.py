@@ -2,7 +2,8 @@ import glob
 import os
 import os.path
 import string
-from urllib2 import urlopen, URLError, HTTPError
+from urllib2 import urlopen
+
 
 def format_filename(filename_str):
     s = filename_str
@@ -42,6 +43,7 @@ def is_file_downloaded(path):
 def get_file_path_from_url(url):
     return url.split("?")[0].split(".")[-1]
 
+
 def download_file(url, path):
     if url is None:
         return
@@ -51,13 +53,12 @@ def download_file(url, path):
     if not is_file_downloaded(path):
         buff = urlopen(url)
         print("Downloading: %s" % (path))
-        
+
         try:
             with open(path, 'wb') as local_file:
                 local_file.write(buff.read())
         except Exception as err:
             print(err)
-
 
 
 def create_path(path):
